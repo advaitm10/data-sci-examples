@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Import data from CSV (Just make it height vs heading accuracy)
-data= pd.read_csv('fifa19.csv')
+# Import data from CSV
+data= pd.read_csv('../fifa19.csv')
 y= np.asarray(data['Overall'], dtype= 'float')
 m= np.shape(y)[0]
 x= np.ones((m, 2), dtype= 'float')
