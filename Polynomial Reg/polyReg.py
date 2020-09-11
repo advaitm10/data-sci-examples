@@ -11,7 +11,7 @@ for i in range(m):
         y[i]= float(y[i][1:len(y[i])-1])
     except:
         y[i]= float(y[i][1:])
-h= np.array([17.69295469, -688.42725802,  817.9606341]) #Hypothesis is y= overall^2 + overall + b
+h= np.array([0, 0,  300]) #Hypothesis is y= overall^2 + overall + b
 x= np.ones((m, 3), dtype= 'float')
 x[:, 1]= np.asarray(data['Overall'], dtype= 'float')
 x[:, 2]= np.square(x[:, 1])
@@ -19,6 +19,13 @@ x[:, 2]= np.square(x[:, 1])
 #Feature Scaling
 x[:, 1]= (x[:, 1]-46)/48
 x[:, 2]= (x[:, 2]-2116)/6720
+
+#Temp
+x= np.ones((100, 3), dtype= 'float')
+x[:, 1]= np.arange(0., 1., 0.01)
+x[:, 2]= np.square(x[:, 1])
+y= np.asarray([300*(i**2) for i in x[:, 1]])
+m= np.shape(y)[0]
 
 # Cost Function
 def costFunction(hypothesis, x, y):
@@ -33,22 +40,22 @@ def gradDescent(hypothesis, x, y):
     return temp
 
 # Main
-print(h, costFunction(h, x, y))
+# print(h, costFunction(h, x, y))
 cost= costFunction(h, x, y)
-while True:
-    h= gradDescent(h, x, y)
-    temp= costFunction(h, x, y)
-    print(temp)
-    #Checks if cost gets higher
-    if(cost< temp):
-        print(cost, temp)
-        break
-    #Checks if cost converges
-    elif(cost-temp<= 0.001):
-        print('Converged')
-        break
-    else:
-        cost= temp
+# while True:
+#     h= gradDescent(h, x, y)
+#     temp= costFunction(h, x, y)
+#     print(temp)
+#     #Checks if cost gets higher
+#     if(cost< temp):
+#         print(cost, temp)
+#         break
+#     #Checks if cost converges
+#     elif(cost-temp<= 0.001):
+#         print('Converged')
+#         break
+#     else:
+#         cost= temp
 
 print(h, cost)
 
@@ -61,3 +68,5 @@ plt.plot(t, s,label= outStr.format(float(h[2]), float(h[1]), float(h[0])))
 plt.axis([0, 1, -600, 600])
 plt.legend()
 plt.show()
+# print(x[:, 1])
+# print(y)
